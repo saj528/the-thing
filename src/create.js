@@ -1,5 +1,6 @@
 const game = require('./index');
 
+
 module.exports.create = function create ()
 {
   // Create world bounds
@@ -59,15 +60,15 @@ module.exports.create = function create ()
   });
 
   // Locks pointer on mousedown
-  game.canvas.addEventListener('mousedown', function () {
-      game.input.mouse.requestPointerLock();
+  this.sys.canvas.addEventListener('mousedown',  () => {
+      this.input.mouse.requestPointerLock();
   });
 
   // Exit pointer lock when Q or escape (by default) is pressed.
-  this.input.keyboard.on('keydown_Q', function (event) {
-      if (game.input.mouse.locked)
-          game.input.mouse.releasePointerLock();
-  }, 0, this);
+  this.input.keyboard.on('keydown_Q', (event) => {
+      if (this.input.mouse.locked)
+          this.input.mouse.releasePointerLock();
+  }, 0);
 
   // Move reticle upon locked pointer move
   this.input.on('pointermove', (pointer) => {
@@ -93,5 +94,6 @@ module.exports.create = function create ()
             this.reticle.y = this.player.y-600;
     }
   }, this);
+  
 
 }

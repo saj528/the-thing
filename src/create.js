@@ -1,23 +1,29 @@
-const game = require('./index');
+
+const Phaser = require('phaser');
 
 
 module.exports.create = function create ()
 {
-  // Create world bounds
-  this.physics.world.setBounds(0, 0, 1600, 1200);
+  this.map = this.add.tilemap('test');
+	const tileset = this.map.addTilesetImage('snow');
+	this.map.createStaticLayer('base', tileset);
 
-  // Add background, player, and reticle sprites
-  var background = this.add.image(800, 600, 'background');
+  // Create world bounds
+  this.physics.world.setBounds(0, 0, 100 * 32, 100 * 32);
+
+  // Add player, and reticle sprites
   this.player = this.physics.add.sprite(800, 600, 'player_handgun');
   this.reticle = this.physics.add.sprite(800, 700, 'target');
 
+  this.map.createStaticLayer('decor', tileset);
+
   // Set image/sprite properties
-  background.setOrigin(0.5, 0.5).setDisplaySize(1600, 1200);
-  this.player.setOrigin(0.5, 0.5).setDisplaySize(132, 120).setCollideWorldBounds(true).setDrag(500, 500);
-  this.reticle.setOrigin(0.5, 0.5).setDisplaySize(25, 25).setCollideWorldBounds(true);
+  this.player.setOrigin(0.5, 0.5).setDisplaySize(48, 48).setCollideWorldBounds(true).setDrag(1000, 1000)
+  this.player.body.setMaxVelocity(200, 200)
+  this.reticle.setOrigin(0.5, 0.5).setDisplaySize(15, 15).setCollideWorldBounds(true);
 
   // Set camera zoom
-  this.cameras.main.zoom = 0.5;
+  this.cameras.main.zoom = 1.0;
 
   // Creates object for input with WASD kets
   this.moveKeys = this.input.keyboard.addKeys({
@@ -60,7 +66,11 @@ module.exports.create = function create ()
   });
 
   // Locks pointer on mousedown
+<<<<<<< HEAD
   this.sys.canvas.addEventListener('mousedown',  () => {
+=======
+  this.sys.canvas.addEventListener('mousedown', () => {
+>>>>>>> b85bf1ba9f77a61b344529778305c95eb6f68e77
       this.input.mouse.requestPointerLock();
   });
 

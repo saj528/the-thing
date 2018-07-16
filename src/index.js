@@ -1,10 +1,10 @@
 const Phaser = require('phaser');
- 
+
 const { preload } = require('./preload');
 const { create } = require('./create');
 const { update } = require('./update');
 
-var config = {
+const config = {
   type: Phaser.WEBGL,
   width: 800,
   height: 600,
@@ -30,6 +30,7 @@ var config = {
   }
 };
 
+<<<<<<< HEAD
 var game = new Phaser.Game(config);
 
 // Ensures reticle does not move offscreen and dist(radius) from player
@@ -60,3 +61,6 @@ if (distBetween > radius)
     reticle.y = player.y + (reticle.y-player.y)/scale;
 }
 }
+=======
+const game = new Phaser.Game(config);
+>>>>>>> b85bf1ba9f77a61b344529778305c95eb6f68e77

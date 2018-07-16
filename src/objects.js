@@ -1,4 +1,4 @@
-const { ballHitBrick } = require('./actions');
+/* const { ballHitBrick } = require('./actions');
 
 const {
   WIDTH,
@@ -40,3 +40,4 @@ module.exports.createBrick = function createBrick(x, y,bric='brick') {
   this.bricks.push(brick);
   this.physics.add.collider(this.ball, brick, ballHitBrick);
 }
+ */

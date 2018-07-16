@@ -1,4 +1,4 @@
-module.exports.setupPaddleControls = function setupPaddleControls() {
+/* module.exports.setupPaddleControls = function setupPaddleControls() {
   const velocity = 500;
   this.input.keyboard.on('keydown_A', () => {
     this.paddle.setVelocityX(-1 * velocity);
@@ -15,4 +15,4 @@ module.exports.setupPaddleControls = function setupPaddleControls() {
   this.input.keyboard.on('keyup_D', () => {
     this.paddle.setVelocityX(0);
   });
-}
+} */

@@ -1,4 +1,32 @@
-const game = require('./index');
+
+// Ensures reticle does not move offscreen and dist(radius) from player
+function constrainReticle(reticle, player, radius)
+{
+var distX = reticle.x-player.x; // X distance between player & reticle
+var distY = reticle.y-player.y; // Y distance between player & reticle
+
+// Ensures reticle cannot be moved offscreen
+if (distX > 800)
+    reticle.x = player.x+800;
+else if (distX < -800)
+    reticle.x = player.x-800;
+
+if (distY > 600)
+    reticle.y = player.y+600;
+else if (distY < -600)
+    reticle.y = player.y-600;
+
+// Ensures reticle cannot be moved further than dist(radius) from player
+var distBetween = Phaser.Math.Distance.Between(player.x, player.y, reticle.x, reticle.y);
+if (distBetween > radius)
+{
+    // Place reticle on perimeter of circle on line intersecting player & reticle
+    var scale = distBetween/radius;
+
+    reticle.x = player.x + (reticle.x-player.x)/scale;
+    reticle.y = player.y + (reticle.y-player.y)/scale;
+}
+}
 
 module.exports.update = function update (time, delta)
 {
@@ -16,7 +44,6 @@ module.exports.update = function update (time, delta)
   this.reticle.body.velocity.y = this.player.body.velocity.y;
 
   // Constrain velocity of this.player
-  constrainVelocity(this.player, 500);
 
   // Constrain position of reticle
   constrainReticle(this.reticle, this.player, 550);

@@ -50,8 +50,10 @@ module.exports.update = function update (time, delta)
   constrainReticle(this.reticle, this.player, 550);
 
   if (Phaser.Geom.Rectangle.Overlaps(this.player.getBounds(), this.zone)) {
+    this.text.setVisible(true);
     if (this.moveKeys['interact'].isDown) {
       console.log('CHODE');
+      this.text.setVisible(false);
     }
   }
   

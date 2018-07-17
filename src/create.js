@@ -108,4 +108,14 @@ module.exports.create = function create ()
     }
   }, this);
 
+  this.text = this.add.text(this.box.x + 20, this.box.y, "use", {
+    font: "18px Arial",
+    fill: "#ff0000",
+    align: "center",
+    backgroundColor: "#00ffff"
+  });
+  this.text.setOrigin(0.5, 0.5);
+  this.text.setVisible(false);
+
+
 }

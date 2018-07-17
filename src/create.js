@@ -38,7 +38,7 @@ module.exports.create = function create ()
       'down': Phaser.Input.Keyboard.KeyCodes.S,
       'left': Phaser.Input.Keyboard.KeyCodes.A,
       'right': Phaser.Input.Keyboard.KeyCodes.D,
-      'interact': Phaser.Input.Keyboard.KeyCodes.E
+      'use': Phaser.Input.Keyboard.KeyCodes.E
   });
 
   // Enables movement of player with WASD keys

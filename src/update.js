@@ -28,6 +28,7 @@ if (distBetween > radius)
 }
 }
 
+
 module.exports.update = function update (time, delta)
 {
   // Rotates this.player to face towards reticle
@@ -47,5 +48,12 @@ module.exports.update = function update (time, delta)
 
   // Constrain position of reticle
   constrainReticle(this.reticle, this.player, 550);
+
+  if (Phaser.Geom.Rectangle.Overlaps(this.player.getBounds(), this.zone)) {
+    if (this.moveKeys['interact'].isDown) {
+      console.log('CHODE');
+    }
+  }
+  
 }
 

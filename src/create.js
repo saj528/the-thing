@@ -22,6 +22,7 @@ module.exports.create = function create ()
 
   this.physics.add.collider(this.player, this.box);
   this.map.createStaticLayer('decor', tileset);
+  this.zone = new Phaser.Geom.Rectangle(this.box.x - 25, this.box.y - 25, 50, 50);
 
   // Set image/sprite properties
   this.player.setOrigin(0.5, 0.5).setDisplaySize(48, 48).setCollideWorldBounds(true).setDrag(1000, 1000)
@@ -52,11 +53,6 @@ module.exports.create = function create ()
   });
   this.input.keyboard.on('keydown_D', (event) => {
       this.player.setAccelerationX(800);
-  });
-  this.input.keyboard.on('keydown_E', (event) => {
-    if (this.player.touching(this.box)){
-      interactBox();
-    }
   });
   // Stops player acceleration on uppress of WASD keys
   this.input.keyboard.on('keyup_W', (event) => {

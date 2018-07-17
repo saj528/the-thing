@@ -1,6 +1,6 @@
 
 const Phaser = require('phaser');
-
+const { interactBox } = require('./actions');
 
 module.exports.create = function create ()
 {
@@ -14,7 +14,13 @@ module.exports.create = function create ()
   // Add player, and reticle sprites
   this.player = this.physics.add.sprite(800, 600, 'player_handgun');
   this.reticle = this.physics.add.sprite(800, 700, 'target');
+  this.box = this.physics.add
+    .sprite(800, 650,'box')
+    .setDisplaySize(25, 25)
+    .setImmovable(true)
+    .setCollideWorldBounds(true)
 
+  this.physics.add.collider(this.player, this.box, interactBox);
   this.map.createStaticLayer('decor', tileset);
 
   // Set image/sprite properties
@@ -66,11 +72,7 @@ module.exports.create = function create ()
   });
 
   // Locks pointer on mousedown
-<<<<<<< HEAD
-  this.sys.canvas.addEventListener('mousedown',  () => {
-=======
   this.sys.canvas.addEventListener('mousedown', () => {
->>>>>>> b85bf1ba9f77a61b344529778305c95eb6f68e77
       this.input.mouse.requestPointerLock();
   });
 
@@ -104,6 +106,5 @@ module.exports.create = function create ()
             this.reticle.y = this.player.y-600;
     }
   }, this);
-  
 
 }

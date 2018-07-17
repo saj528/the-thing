@@ -9,4 +9,5 @@ module.exports.preload = function preload ()
   this.load.image('background', 'assets/skies/underwater1.png');
   this.load.image('snow', 'assets/tileset/snow.png');
   this.load.tilemapTiledJSON('test', 'assets/maps/test.json');
+  this.load.image('box', 'assets/box.png');
 }

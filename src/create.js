@@ -20,7 +20,7 @@ module.exports.create = function create ()
     .setImmovable(true)
     .setCollideWorldBounds(true)
 
-  this.physics.add.collider(this.player, this.box, interactBox);
+  this.physics.add.collider(this.player, this.box);
   this.map.createStaticLayer('decor', tileset);
 
   // Set image/sprite properties
@@ -36,7 +36,8 @@ module.exports.create = function create ()
       'up': Phaser.Input.Keyboard.KeyCodes.W,
       'down': Phaser.Input.Keyboard.KeyCodes.S,
       'left': Phaser.Input.Keyboard.KeyCodes.A,
-      'right': Phaser.Input.Keyboard.KeyCodes.D
+      'right': Phaser.Input.Keyboard.KeyCodes.D,
+      'interact': Phaser.Input.Keyboard.KeyCodes.E
   });
 
   // Enables movement of player with WASD keys
@@ -52,7 +53,11 @@ module.exports.create = function create ()
   this.input.keyboard.on('keydown_D', (event) => {
       this.player.setAccelerationX(800);
   });
-
+  this.input.keyboard.on('keydown_E', (event) => {
+    if (this.player.touching(this.box)){
+      interactBox();
+    }
+  });
   // Stops player acceleration on uppress of WASD keys
   this.input.keyboard.on('keyup_W', (event) => {
       if (this.moveKeys['down'].isUp)

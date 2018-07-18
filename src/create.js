@@ -12,7 +12,7 @@ module.exports.create = function create ()
   this.physics.world.setBounds(0, 0, 100 * 32, 100 * 32);
 
   // Add player, and reticle sprites
-  this.player = this.physics.add.sprite(800, 600, 'player_handgun');
+  this.player = this.physics.add.sprite(800, 600, 'player_handgun')
   this.reticle = this.physics.add.sprite(800, 700, 'target');
   this.box = this.physics.add
     .sprite(800, 650,'box')
@@ -29,6 +29,10 @@ module.exports.create = function create ()
   this.player.body.setMaxVelocity(200, 200)
   this.reticle.setOrigin(0.5, 0.5).setDisplaySize(15, 15).setCollideWorldBounds(true);
 
+  //the thing boolean
+  this.player.isThing = true
+  console.log(this.player.isThing);
+  
   // Set camera zoom
   this.cameras.main.zoom = 1.0;
 
@@ -38,7 +42,8 @@ module.exports.create = function create ()
       'down': Phaser.Input.Keyboard.KeyCodes.S,
       'left': Phaser.Input.Keyboard.KeyCodes.A,
       'right': Phaser.Input.Keyboard.KeyCodes.D,
-      'use': Phaser.Input.Keyboard.KeyCodes.E
+      'use': Phaser.Input.Keyboard.KeyCodes.E,
+      'transform': Phaser.Input.Keyboard.KeyCodes.F,
   });
 
   // Enables movement of player with WASD keys
@@ -70,6 +75,21 @@ module.exports.create = function create ()
   this.input.keyboard.on('keyup_D', (event) => {
       if (this.moveKeys['left'].isUp)
           this.player.setAccelerationX(0);
+  });
+  
+  //the thing transform
+  this.input.keyboard.on('keydown_F', (event) => {
+    if (this.player.isThing === true)
+    this.sys.time.addEvent({
+        delay: 2000,
+        callback: () => {
+          if(this.player.texture.key === 'player_handgun'){
+            this.player.setTexture('thing');
+          } else{
+              this.player.setTexture('player_handgun');
+          }
+        }
+      })      
   });
 
   // Locks pointer on mousedown

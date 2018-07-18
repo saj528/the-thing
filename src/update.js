@@ -53,8 +53,9 @@ module.exports.update = function update (time, delta)
     this.text.setVisible(true)
     if (this.moveKeys['use'].isDown) {
       console.log('CHODE');
-      this.text.setVisible(false);
     }
+  } else{
+    this.text.setVisible(false)
   }
   
 }

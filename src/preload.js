@@ -10,5 +10,8 @@ module.exports.preload = function preload () {
   this.load.image('snow', 'assets/tileset/snow.png');
   this.load.tilemapTiledJSON('test', 'assets/maps/test.json');
   this.load.image('box', 'assets/box.png');
-  this.load.image('thing', 'assets/thing.png');
+  this.load.image('thing', 'assets/thing/thing.png');
+  this.load.image('phase1', 'assets/thing/phase1.png');
+  this.load.image('phase2', 'assets/thing/phase2.png');
+  this.load.image('phase3', 'assets/thing/phase3.png');
 }

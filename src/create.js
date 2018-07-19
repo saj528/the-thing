@@ -1,28 +1,45 @@
 
 const Phaser = require('phaser');
-const { interactBox } = require('./actions');
 
 module.exports.create = function create ()
 {
   this.map = this.add.tilemap('test');
-	const tileset = this.map.addTilesetImage('snow');
-	this.map.createStaticLayer('base', tileset);
+  const tileset = this.map.addTilesetImage('snow');
+  this.map.createDynamicLayer('base', tileset);
+
+  // this.lights.enable().setAmbientColor(0x555555);
+  // this.lights.addLight(500, 250, 200);
 
   // Create world bounds
   this.physics.world.setBounds(0, 0, 100 * 32, 100 * 32);
 
   // Add player, and reticle sprites
-  this.player = this.physics.add.sprite(800, 600, 'player_handgun')
+  this.player = this.physics.add.sprite(800, 600, 'player_handgun');
   this.reticle = this.physics.add.sprite(800, 700, 'target');
+  // this.zone = this.physics.add
+  //   .sprite(800, 650, 'box')
+  //   .setDisplaySize(45, 45)
+  //   .setImmovable(true)
+  //   .setCollideWorldBounds(true)
+  //   .setVisible(false);
   this.box = this.physics.add
-    .sprite(800, 650,'box')
+    .sprite(800, 650, 'box')
     .setDisplaySize(25, 25)
     .setImmovable(true)
-    .setCollideWorldBounds(true)
+    .setCollideWorldBounds(true);
 
-  this.physics.add.collider(this.player, this.box);
-  this.map.createStaticLayer('decor', tileset);
+  this.text = this.add.text(this.box.x + 20, this.box.y, "use", {
+    font: "18px Arial",
+    fill: "#ff0000",
+    align: "center",
+    backgroundColor: "#00ffff"
+  });
+  this.text.setOrigin(0.5, 0.5);
+  this.text.setVisible(false);
+
   this.zone = new Phaser.Geom.Rectangle(this.box.x - 25, this.box.y - 25, 50, 50);
+  this.physics.add.collider(this.player, this.box)
+  this.map.createStaticLayer('decor', tileset);
 
   // Set image/sprite properties
   this.player.setOrigin(0.5, 0.5).setDisplaySize(48, 48).setCollideWorldBounds(true).setDrag(1000, 1000)
@@ -31,10 +48,11 @@ module.exports.create = function create ()
 
   //the thing boolean
   this.player.isThing = true
-  console.log(this.player.isThing);
-  
+
+  this.overlay = this.add.image(0, 0, 'overlay');
+
   // Set camera zoom
-  this.cameras.main.zoom = 1.0;
+  this.cameras.main.zoom = 1;
 
   // Creates object for input with WASD kets
   this.moveKeys = this.input.keyboard.addKeys({
@@ -76,7 +94,7 @@ module.exports.create = function create ()
       if (this.moveKeys['left'].isUp)
           this.player.setAccelerationX(0);
   });
-  
+
   //the thing transform
   this.input.keyboard.on('keydown_F', (event) => {
     if (this.player.isThing === true)
@@ -89,7 +107,7 @@ module.exports.create = function create ()
               this.player.setTexture('player_handgun');
           }
         }
-      })      
+      })
   });
 
   // Locks pointer on mousedown

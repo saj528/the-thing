@@ -1,3 +1,4 @@
+const Phaser = require('phaser');
 
 // Ensures reticle does not move offscreen and dist(radius) from player
 function constrainReticle(reticle, player, radius)
@@ -44,7 +45,12 @@ module.exports.update = function update (time, delta)
   this.reticle.body.velocity.x = this.player.body.velocity.x;
   this.reticle.body.velocity.y = this.player.body.velocity.y;
 
-  // Constrain velocity of this.player
+  // this.box.clearTint();
+  if (Phaser.Geom.Rectangle.Overlaps(this.player.getBounds(), this.zone)) {
+    this.text.setVisible(true);
+  } else {
+    this.text.setVisible(false);
+  }
 
   // Constrain position of reticle
   constrainReticle(this.reticle, this.player, 550);
@@ -57,6 +63,8 @@ module.exports.update = function update (time, delta)
   } else{
     this.text.setVisible(false)
   }
-  
+
+  this.overlay.x = this.player.x;
+  this.overlay.y = this.player.y;
 }
 

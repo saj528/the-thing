@@ -7,7 +7,7 @@
          "name":"base",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":100,
          "x":0,
          "y":0
@@ -32,12 +32,12 @@
         {
          "columns":9,
          "firstgid":1,
-         "image":"..\/tileset\/snow.png",
-         "imageheight":160,
-         "imagewidth":288,
-         "margin":0,
+         "image":"..\/tileset\/snow_fixed.png",
+         "imageheight":170,
+         "imagewidth":306,
+         "margin":1,
          "name":"snow",
-         "spacing":0,
+         "spacing":2,
          "tilecount":45,
          "tileheight":32,
          "tilewidth":32

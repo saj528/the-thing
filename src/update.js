@@ -66,5 +66,59 @@ module.exports.update = function update (time, delta)
 
   this.overlay.x = this.player.x;
   this.overlay.y = this.player.y;
+
+  this.flashlight.x = this.player.x;
+  this.flashlight.y = this.player.y;
+  this.flashlight.rotation = this.player.rotation
+
+  const directions = [
+    [800, 800],
+    [800, -800],
+    [-800, 800],
+    [-800, -800],
+    [0, 800],
+    [0, -800],
+    [-800, 0],
+    [-800, 0],
+  ]
+  if (Math.random() < 0.05 && this.ai.health > 0) {
+    const direction = directions[parseInt(Math.random() * directions.length)];
+    this.ai.setAccelerationX(direction[0]);
+    this.ai.setAccelerationY(direction[1]);
+  }
+
+  if (this.sys.arcadePhysics.overlap(this.player, this.ai)) {
+    if (this.player.canAttack && this.moveKeys['attack'].isDown) {
+      this.ai.setTintFill(0xff0000);
+
+      this.sys.time.addEvent({
+        delay: 200,
+        callback: () => {
+          if (this.ai.health > 0) {
+            this.ai.clearTint();
+          }
+        }
+      });
+
+      this.player.canAttack = false;
+
+      this.sys.time.addEvent({
+        delay: 800,
+        callback: () => {
+          this.player.canAttack = true;
+        }
+      });
+
+      this.ai.health -= 35;
+      console.log('hurting AI: ', this.ai.health, 'hp remaining');
+
+      if (this.ai.health <= 0) {
+        this.ai.setAccelerationX(0);
+        this.ai.setAccelerationY(0);
+        console.log('ai killed');
+      }
+    }
+  }
+
 }
 

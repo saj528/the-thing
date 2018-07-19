@@ -6,6 +6,8 @@ module.exports.preload = function preload () {
   ); // Made by tokkatrain: https://tokkatrain.itch.io/top-down-basic-set
   this.load.image('target', 'assets/demoscene/ball.png');
   this.load.image('overlay', 'assets/overlay.png');
+  this.load.image('thing_view', 'assets/thing_view.png');
+  this.load.image('flashlight', 'assets/flashlight.png');
   this.load.image('background', 'assets/skies/underwater1.png');
   this.load.image('snow_16x16', 'assets/tileset/snow_16x16.png');
   this.load.tilemapTiledJSON('snow', 'assets/maps/snow.json');

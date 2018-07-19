@@ -64,6 +64,7 @@ module.exports.create = function create ()
       'transform': Phaser.Input.Keyboard.KeyCodes.F,
   });
 
+
   // Enables movement of player with WASD keys
   this.input.keyboard.on('keydown_W', (event) => {
       this.player.setAccelerationY(-800);
@@ -98,13 +99,17 @@ module.exports.create = function create ()
   //the thing transform
   this.input.keyboard.on('keydown_F', (event) => {
     if (this.player.isThing === true)
+    this.input.enabled = false;
+    this.player.setTexture('phase1');
     this.sys.time.addEvent({
         delay: 2000,
         callback: () => {
           if(this.player.texture.key === 'player_handgun'){
             this.player.setTexture('thing');
+            this.input.enabled = true;
           } else{
               this.player.setTexture('player_handgun');
+              this.input.enabled = true;
           }
         }
       })

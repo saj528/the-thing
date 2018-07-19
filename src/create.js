@@ -3,8 +3,8 @@ const Phaser = require('phaser');
 
 module.exports.create = function create ()
 {
-  this.map = this.add.tilemap('test');
-  const tileset = this.map.addTilesetImage('snow');
+  this.map = this.add.tilemap('snow');
+  const tileset = this.map.addTilesetImage('snow_16x16');
   this.map.createDynamicLayer('base', tileset);
 
   // this.lights.enable().setAmbientColor(0x555555);
@@ -39,12 +39,16 @@ module.exports.create = function create ()
 
   this.zone = new Phaser.Geom.Rectangle(this.box.x - 25, this.box.y - 25, 50, 50);
   this.physics.add.collider(this.player, this.box)
-  this.map.createStaticLayer('decor', tileset);
+  this.decorLayer = this.map.createStaticLayer('decor', tileset);
+  this.decorLayer.setCollision([100, 101, 140, 141, 124, 125], true);
 
   // Set image/sprite properties
   this.player.setOrigin(0.5, 0.5).setDisplaySize(48, 48).setCollideWorldBounds(true).setDrag(1000, 1000)
   this.player.body.setMaxVelocity(200, 200)
+  this.player.body.setSize(30, 30);
+  this.player.body.setOffset(17, 17);
   this.reticle.setOrigin(0.5, 0.5).setDisplaySize(15, 15).setCollideWorldBounds(true);
+  this.physics.add.collider(this.player, this.decorLayer);
 
   //the thing boolean
   this.player.isThing = true

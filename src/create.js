@@ -104,7 +104,8 @@ module.exports.create = function create ()
   this.input.keyboard.on('keydown_F', (event) => {
     if (this.player.isThing === true)
     this.input.enabled = false;
-    this.player.setTexture('phase1');
+    this.player.setAccelerationX(0);
+    this.player.setAccelerationY(0);
     this.sys.time.addEvent({
         delay: 2000,
         callback: () => {

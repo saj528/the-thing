@@ -16,6 +16,8 @@ module.exports.create = function create ()
   // Add player, and reticle sprites
   this.player = this.physics.add.sprite(800, 600, 'player_handgun');
   this.reticle = this.physics.add.sprite(800, 700, 'target');
+  //this.trans_anime = this.add.sprite('robot')
+  //this.trans_anime.animations.add('birth',[1,2,3],1)
   // this.zone = this.physics.add
   //   .sprite(800, 650, 'box')
   //   .setDisplaySize(45, 45)
@@ -106,6 +108,7 @@ module.exports.create = function create ()
     this.input.enabled = false;
     this.player.setAccelerationX(0);
     this.player.setAccelerationY(0);
+    this.trans_anime.animations.play('birth')
     this.sys.time.addEvent({
         delay: 2000,
         callback: () => {

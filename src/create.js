@@ -1,5 +1,6 @@
 
 const Phaser = require('phaser');
+const { createPlayer, setupCollisionsForPlayer } = require('./objects');
 
 module.exports.create = function create ()
 {
@@ -14,16 +15,21 @@ module.exports.create = function create ()
   this.physics.world.setBounds(0, 0, 100 * 32, 100 * 32);
 
   // Add player, and reticle sprites
-  this.player = this.physics.add.sprite(800, 600, 'player_handgun');
+
+  // this.ai = this.physics.add.sprite(600, 500, 'player_handgun');
+  this.player = createPlayer.call(this, 800, 600);
+  this.ai = createPlayer.call(this, 800, 600);
   this.reticle = this.physics.add.sprite(800, 700, 'target');
+
   //this.trans_anime = this.add.sprite('robot')
   //this.trans_anime.animations.add('birth',[1,2,3],1)
-  // this.zone = this.physics.add
-  //   .sprite(800, 650, 'box')
-  //   .setDisplaySize(45, 45)
-  //   .setImmovable(true)
-  //   .setCollideWorldBounds(true)
-  //   .setVisible(false);
+   this.zone = this.physics.add
+    .sprite(800, 650, 'box')
+    .setDisplaySize(45, 45)
+    .setImmovable(true)
+    .setCollideWorldBounds(true)
+    .setVisible(false);
+
   this.box = this.physics.add
     .sprite(800, 650, 'box')
     .setDisplaySize(25, 25)
@@ -45,17 +51,28 @@ module.exports.create = function create ()
   this.decorLayer.setCollision([100, 101, 140, 141, 124, 125], true);
 
   // Set image/sprite properties
-  this.player.setOrigin(0.5, 0.5).setDisplaySize(48, 48).setCollideWorldBounds(true).setDrag(1000, 1000)
-  this.player.body.setMaxVelocity(200, 200)
-  this.player.body.setSize(30, 30);
-  this.player.body.setOffset(17, 17);
   this.reticle.setOrigin(0.5, 0.5).setDisplaySize(15, 15).setCollideWorldBounds(true);
-  this.physics.add.collider(this.player, this.decorLayer);
 
   //the thing boolean
   this.player.isThing = true
 
   this.overlay = this.add.image(0, 0, 'overlay');
+  this.overlay.setVisible(false);
+  this.flashlight = this.add.image(0, 0, 'flashlight');
+  this.flashlight.setVisible(false);
+  this.thingView = this.add.image(400, 300, 'thing_view');
+  this.thingView.setScrollFactor(0);
+  this.thingView.setVisible(false);
+
+  if (this.player.isThing) {
+    this.overlay.setVisible(true);
+    this.thingView.setVisible(true);
+  } else {
+    this.flashlight.setVisible(true);
+  }
+
+  setupCollisionsForPlayer.call(this, this.player);
+  setupCollisionsForPlayer.call(this, this.ai);
 
   // Set camera zoom
   this.cameras.main.zoom = 1;
@@ -68,6 +85,7 @@ module.exports.create = function create ()
       'right': Phaser.Input.Keyboard.KeyCodes.D,
       'use': Phaser.Input.Keyboard.KeyCodes.E,
       'transform': Phaser.Input.Keyboard.KeyCodes.F,
+      'attack': Phaser.Input.Keyboard.KeyCodes.SPACE,
   });
 
 
@@ -108,7 +126,6 @@ module.exports.create = function create ()
     this.input.enabled = false;
     this.player.setAccelerationX(0);
     this.player.setAccelerationY(0);
-    this.trans_anime.animations.play('birth')
     this.sys.time.addEvent({
         delay: 2000,
         callback: () => {

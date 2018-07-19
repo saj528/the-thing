@@ -1,43 +1,20 @@
-/* const { ballHitBrick } = require('./actions');
 
-const {
-  WIDTH,
-  HEIGHT,
-  BALL_SPEED,
-  BRICK_HEIGHT,
-  BRICK_WIDTH,
-} = require('./constants');
-
-module.exports.createBall = function createBall() {
-  this.ball = this.physics.add
-    .sprite(WIDTH / 2, HEIGHT / 2, 'ball')
+module.exports.createPlayer = function createPlayer(x, y) {
+  const player = this.physics.add.sprite(x, y, 'player_handgun');
+  player
     .setOrigin(0.5, 0.5)
-    .setDisplaySize(25, 25)
+    .setDisplaySize(48, 48)
     .setCollideWorldBounds(true)
-    .setBounce(1);
-  this.ball.body.setVelocityX(-BALL_SPEED);
-  this.ball.body.setVelocityY(BALL_SPEED);
-
-  this.physics.add.collider(this.paddle, this.ball);
+    .setDrag(1000, 1000)
+  player.body
+    .setMaxVelocity(200, 200)
+    .setSize(30, 30)
+    .setOffset(17, 17);
+  player.canAttack = true;
+  player.health = 100;
+  return player;
 }
 
-module.exports.createPaddle = function createPaddle() {
-  this.paddle = this.physics.add
-    .sprite(400, 570, 'paddle')
-    .setOrigin(0.5, 0.5)
-    .setDisplaySize(104, 24)
-    .setCollideWorldBounds(true)
-    .setImmovable(true);
+module.exports.setupCollisionsForPlayer = function setupCollisionForPlayer(player) {
+  this.physics.add.collider(player, this.decorLayer);
 }
-
-module.exports.createBrick = function createBrick(x, y,bric='brick') {
-  const brick = this.physics.add
-    .sprite(x, y, bric)
-    .setOrigin(0.5, 0.5)
-    .setDisplaySize(BRICK_WIDTH, BRICK_HEIGHT)
-    .setCollideWorldBounds(true)
-    .setImmovable(true);
-  this.bricks.push(brick);
-  this.physics.add.collider(this.ball, brick, ballHitBrick);
-}
- */

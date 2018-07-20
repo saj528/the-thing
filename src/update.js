@@ -87,7 +87,7 @@ module.exports.update = function update (time, delta)
     this.ai.setAccelerationY(direction[1]);
   }
 
-  if (this.sys.arcadePhysics.overlap(this.player, this.ai)) {
+  if ((this.sys.arcadePhysics.overlap(this.player, this.ai)) && (this.player.texture.key === 'thing')) {
     if (this.player.canAttack && this.moveKeys['attack'].isDown) {
       this.ai.setTintFill(0xff0000);
 

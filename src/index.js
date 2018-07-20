@@ -1,8 +1,7 @@
 const Phaser = require('phaser');
 
-const { preload } = require('./preload');
-const { create } = require('./create');
-const { update } = require('./update');
+const { MainScene } = require('./main_scene');
+const { MenuScene } = require('./menu_scene');
 
 const config = {
   type: Phaser.WEBGL,
@@ -15,19 +14,10 @@ const config = {
       debug: true
     }
   },
-  scene: {
-      preload: preload,
-      create: create,
-      update: update,
-      extend: {
-                  player: null,
-                  reticle: null,
-                  moveKeys: null,
-                  bullets: null,
-                  lastFired: 0,
-                  time: 0,
-              }
-  }
+  scene: [
+    MenuScene,
+    MainScene,
+  ]
 };
 
 const game = new Phaser.Game(config);

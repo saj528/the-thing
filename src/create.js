@@ -111,6 +111,7 @@ this.physics.add.collider(this.acidBalls, this.ai, (ai, acidBall) => {
   acidPuddle.active = true;
   acidPuddle.timeLeft = 2000;
   acidPuddle.setMass(0);
+  acidPuddle.setDisplaySize(25, 25)
   acidPuddle.enableBody(true, acidBall.x, acidBall.y, true, true);
   acidBall.active = false;
   acidBall.disableBody(true, true);

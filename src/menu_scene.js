@@ -17,7 +17,7 @@ module.exports.MenuScene = class MenuScene extends Phaser.Scene {
     this.add
     .sprite(400, 300, 'menuBG')
     .setDisplaySize(410, 600)
-    this.add.text(300, 200, "Controls \n WASD: Movement \n F: Alien transform \n Mouse1: Shoot acid \n E: interact \n SpaceBar: Attack", {
+    this.add.text(300, 100, "Controls \n WASD: Movement \n F: Alien transform \n Mouse1: Shoot acid \n E: interact \n SpaceBar: Attack", {
       font: "18px Arial",
       fill: "#ff0000",
       align: "center",

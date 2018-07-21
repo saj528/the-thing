@@ -13,7 +13,7 @@ module.exports.create = function create ()
   // this.lights.addLight(500, 250, 200);
 
   // Create world bounds
-  this.physics.world.setBounds(0, 0, 100 * 32, 100 * 32);
+  this.physics.world.setBounds(0, 0, 100 * 16, 100 * 16);
 
   // Add player, and reticle sprites
   this.acidPuddles = this.add.systems.arcadePhysics.add.group();

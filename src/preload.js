@@ -13,6 +13,8 @@ module.exports.preload = function preload () {
   this.load.tilemapTiledJSON('snow', 'assets/maps/snow.json');
   this.load.image('box', 'assets/box.png');
   this.load.image('thing', 'assets/thing/thing.png');
+  this.load.image('acid_ball', 'assets/thing/acid_ball.png');
+  this.load.image('acid_puddle', 'assets/thing/acid.png');
   //this.load.spritesheet('egg', 'assets/thing/egg_animation.png',128,192);
 
 }

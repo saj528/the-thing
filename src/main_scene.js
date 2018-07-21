@@ -12,8 +12,8 @@ module.exports.MainScene = class MainScene extends Phaser.Scene {
         player: null,
         reticle: null,
         moveKeys: null,
-        bullets: null,
-        lastFired: 0,
+        acidBalls: null,
+        nextFire: 0,
         time: 0,
       },
     });

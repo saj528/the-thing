@@ -120,5 +120,60 @@ module.exports.update = function update (time, delta)
     }
   }
 
+  if ((this.sys.arcadePhysics.overlap(this.player, this.ai)) && (this.player.texture.key === 'thing')) {
+    if (this.player.canAttack && this.moveKeys['attack'].isDown) {
+      this.ai.setTintFill(0xff0000);
+
+      this.sys.time.addEvent({
+        delay: 200,
+        callback: () => {
+          if (this.ai.health > 0) {
+            this.ai.clearTint();
+          }
+        }
+      });
+
+      this.player.canAttack = false;
+
+      this.sys.time.addEvent({
+        delay: 800,
+        callback: () => {
+          this.player.canAttack = true;
+        }
+      });
+
+      this.ai.health -= 35;
+      console.log('hurting AI: ', this.ai.health, 'hp remaining');
+
+      if (this.ai.health <= 0) {
+        this.ai.setAccelerationX(0);
+        this.ai.setAccelerationY(0);
+        console.log('ai killed');
+      }
+    }
+  }
+
+  if (this.input.activePointer.isDown)
+    {
+      if ((this.player.texture.key === 'thing')){
+        fireAcid.call(this);
+      }
+    }
+
+  function fireAcid() {
+    const now = new Date().getTime();
+    if (this.nextFire === undefined){
+      this.nextFire = 0;
+    }
+    if (now > this.nextFire && this.acidBalls.countActive(false) > 0) {
+        this.nextFire = now + 1000;
+        var acidBall = this.acidBalls.getFirstDead();
+        acidBall.active = true;
+        acidBall.timeLeft = 2000;
+        acidBall.setMass(0);
+        acidBall.enableBody(true, this.player.x - 8, this.player.y - 8, true, true);
+        this.physics.systems.arcadePhysics.moveToObject(acidBall, this.reticle, 1000);
+    }
+  } 
 }
 

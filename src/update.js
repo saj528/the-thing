@@ -170,7 +170,7 @@ module.exports.update = function update (time, delta)
         var acidBall = this.acidBalls.getFirstDead();
         acidBall.active = true;
         acidBall.timeLeft = 2000;
-        acidBall.setMass(0);
+        acidBall.setMass(1);
         acidBall.enableBody(true, this.player.x - 8, this.player.y - 8, true, true);
         this.physics.systems.arcadePhysics.moveToObject(acidBall, this.reticle, 1000);
     }

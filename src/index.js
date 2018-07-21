@@ -2,6 +2,7 @@ const Phaser = require('phaser');
 
 const { MainScene } = require('./main_scene');
 const { MenuScene } = require('./menu_scene');
+const { HudScene } = require('./hud_scene');
 
 const config = {
   type: Phaser.WEBGL,
@@ -17,6 +18,7 @@ const config = {
   scene: [
     MenuScene,
     MainScene,
+    HudScene
   ]
 };
 

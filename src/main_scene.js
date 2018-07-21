@@ -25,6 +25,7 @@ module.exports.MainScene = class MainScene extends Phaser.Scene {
 
   create() {
     create.call(this);
+    this.scene.manager.start('hud');
   }
 
   update() {

@@ -4,7 +4,6 @@ module.exports.MenuScene = class MenuScene extends Phaser.Scene {
   constructor() {
     super({
       key: 'menu',
-      // active: true,
     });
   }
 
@@ -17,16 +16,18 @@ module.exports.MenuScene = class MenuScene extends Phaser.Scene {
       font: "18px Arial",
       fill: "#ff0000",
       align: "center",
-      backgroundColor: "#00ffff"
-    }).setInteractive();
+    })
+      .setInteractive();
     this.startBtn.on('pointerdown', this.start, this);
+    this.startBtn.on('pointerover', () => this.startBtn.setFill('#ffff00'), this);
+    this.startBtn.on('pointerout', () => this.startBtn.setFill('#ff0000'), this);
   }
 
   update() {
   }
 
   start() {
-    this.scene.start('main');
+    this.scene.manager.switch('menu', 'main');
   }
 
 }

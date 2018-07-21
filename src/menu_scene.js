@@ -9,9 +9,14 @@ module.exports.MenuScene = class MenuScene extends Phaser.Scene {
 
   preload() {
     this.load.image('target', 'assets/demoscene/ball.png');
+    this.load.image('menuBG', 'assets/menuBackground.jpeg');
   }
 
   create() {
+
+    this.add
+    .sprite(400, 300, 'menuBG')
+    .setDisplaySize(410, 600)
     this.add.text(300, 200, "Controls \n WASD: Movement \n F: Alien transform \n Mouse1: Shoot acid", {
       font: "18px Arial",
       fill: "#ff0000",

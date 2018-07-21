@@ -15,6 +15,7 @@ module.exports.preload = function preload () {
   this.load.image('thing', 'assets/thing/thing.png');
   this.load.image('acid_ball', 'assets/thing/acid_ball.png');
   this.load.image('acid_puddle', 'assets/thing/acid.png');
+  this.load.image('menuBG', 'assets/menuBackground.jpeg');
   //this.load.spritesheet('egg', 'assets/thing/egg_animation.png',128,192);
 
 }

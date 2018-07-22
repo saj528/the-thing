@@ -16,5 +16,5 @@ module.exports.createPlayer = function createPlayer(x, y) {
 }
 
 module.exports.setupCollisionsForPlayer = function setupCollisionForPlayer(player) {
-  this.physics.add.collider(player, this.decorLayer);
+  this.physics.add.collider(player, this.baseLayer);
 }

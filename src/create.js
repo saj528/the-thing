@@ -24,6 +24,15 @@ module.exports.create = function create ()
   this.physics.world.setBounds(0, 0, 50 * 16, 50 * 16);
 
   // Add player, and reticle sprites
+  this.acidPuddles = this.add.systems.arcadePhysics.add.group();
+  const createdAcidPuddles = this.acidPuddles.createMultiple({
+    key: 'acid_puddle',
+    active: false,
+    visible: false,
+    repeat: 49,
+    max: 50,
+  });
+
 
   // this.ai = this.physics.add.sprite(600, 500, 'player_handgun');
   this.player = createPlayer.call(this, 400, 500);
@@ -109,13 +118,15 @@ module.exports.create = function create ()
     max: 50,
   });
 
-  this.acidPuddles = this.add.systems.arcadePhysics.add.group();
-  const createdAcidPuddles = this.acidPuddles.createMultiple({
-    key: 'acid_puddle',
-    active: false,
-    visible: false,
-    repeat: 49,
-    max: 50,
+  this.physics.add.collider(this.acidBalls, this.ai, (ai, acidBall) => {
+    var acidPuddle = this.acidPuddles.getFirstDead();
+    acidPuddle.active = true;
+    acidPuddle.timeLeft = 2000;
+    acidPuddle.setMass(1);
+    acidPuddle.setDisplaySize(25, 25)
+    acidPuddle.enableBody(true, acidBall.x, acidBall.y, true, true);
+    acidBall.active = false;
+    acidBall.disableBody(true, true);
   });
 
   this.physics.add.collider(this.acidBalls, this.ai, (ai, acidBall) => {

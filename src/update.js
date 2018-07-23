@@ -32,6 +32,7 @@ if (distBetween > radius)
 
 module.exports.update = function update (time, delta)
 {
+  // this.player.temperature -= 0.0001;
   // Rotates this.player to face towards reticle
   this.player.rotation = Phaser.Math.Angle.Between(this.player.x, this.player.y, this.reticle.x, this.reticle.y);
 
@@ -50,6 +51,12 @@ module.exports.update = function update (time, delta)
     this.text.setVisible(true);
   } else {
     this.text.setVisible(false);
+  }
+
+  if (!this.player.isInside) {
+    this.player.setMaxVelocity(75, 75)
+  } else {
+    this.player.setMaxVelocity(150, 150)
   }
 
   // Constrain position of reticle
@@ -166,13 +173,13 @@ module.exports.update = function update (time, delta)
       this.nextFire = 0;
     }
     if (now > this.nextFire && this.acidBalls.countActive(false) > 0) {
-        this.nextFire = now + 1000;
-        var acidBall = this.acidBalls.getFirstDead();
-        acidBall.active = true;
-        acidBall.timeLeft = 2000;
-        acidBall.setMass(1);
-        acidBall.enableBody(true, this.player.x - 8, this.player.y - 8, true, true);
-        this.physics.systems.arcadePhysics.moveToObject(acidBall, this.reticle, 1000);
+      this.nextFire = now + 1000;
+      var acidBall = this.acidBalls.getFirstDead();
+      acidBall.active = true;
+      acidBall.timeLeft = 2000;
+      acidBall.setMass(1);
+      acidBall.enableBody(true, this.player.x - 8, this.player.y - 8, true, true);
+      this.physics.systems.arcadePhysics.moveToObject(acidBall, this.reticle, 1000);
     }
   }
 }

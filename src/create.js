@@ -17,6 +17,28 @@ module.exports.create = function create ()
     31, 36, 49, 54, 86, 87, 176, 177, 221, 222, 239, 240
   ], true);
 
+  const inside = this.baseLayer.filterTiles((tile, id) => {
+    return [217, 218, 235, 236].indexOf(tile.index) !== -1;
+  })
+  inside.forEach((tile) => {
+    tile.collisionCallback = (sprite, tile) => {
+      if (sprite === this.player) {
+        this.player.isInside = true
+      }
+    }
+  });
+
+  const outside = this.baseLayer.filterTiles((tile, id) => {
+    return [217, 218, 235, 236].indexOf(tile.index) === -1;
+  })
+  outside.forEach((tile) => {
+    tile.collisionCallback = (sprite, tile) => {
+      if (sprite === this.player) {
+        this.player.isInside = false
+      }
+    }
+  });
+
   // this.lights.enable().setAmbientColor(0x555555);
   // this.lights.addLight(500, 250, 200);
 
@@ -33,6 +55,29 @@ module.exports.create = function create ()
     max: 50,
   });
 
+  this.sys.time.addEvent({
+    delay: 1000,
+    loop: true,
+    callback: () => {
+      if (this.player.isInside) {
+        this.player.temperature += 0.1;
+        this.player.temperature = Math.min(98.1, this.player.temperature);
+      } else {
+        this.player.temperature -= 0.1;
+      }
+    }
+  })
+
+  this.sys.time.addEvent({
+    delay: 5000,
+    loop: true,
+    callback: () => {
+      if (this.player.temperature < 95.0) {
+        this.player.health -= 1;
+        this.player.emit('hurt');
+      }
+    }
+  })
 
   // this.ai = this.physics.add.sprite(600, 500, 'player_handgun');
   this.player = createPlayer.call(this, 400, 500);

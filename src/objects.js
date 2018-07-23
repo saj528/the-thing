@@ -12,6 +12,7 @@ module.exports.createPlayer = function createPlayer(x, y) {
     .setOffset(17, 17);
   player.canAttack = true;
   player.health = 100;
+  player.temperature = 98.1;
   return player;
 }
 

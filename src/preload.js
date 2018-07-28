@@ -1,12 +1,12 @@
 
 module.exports.preload = function preload () {
-  // Load in images and sprites
   this.load.spritesheet('player_handgun', 'assets/sprites/player_handgun.png',
       { frameWidth: 66, frameHeight: 60 }
-  ); // Made by tokkatrain: https://tokkatrain.itch.io/top-down-basic-set
+  );
   this.load.image('target', 'assets/demoscene/ball.png');
   this.load.image('overlay', 'assets/overlay.png');
   this.load.image('thing_view', 'assets/thing_view.png');
+  this.load.image('egg', 'assets/thing/phase1.png');
   this.load.image('flashlight', 'assets/flashlight.png');
   this.load.image('background', 'assets/skies/underwater1.png');
   this.load.image('tile_16x16', 'assets/tileset/tile_16x16.png');
@@ -17,5 +17,4 @@ module.exports.preload = function preload () {
   this.load.image('acid_puddle', 'assets/thing/acid.png');
   this.load.image('menuBG', 'assets/menuBackground.jpeg');
   //this.load.spritesheet('egg', 'assets/thing/egg_animation.png',128,192);
-
 }

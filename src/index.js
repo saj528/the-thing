@@ -12,7 +12,7 @@ const config = {
     default: 'arcade',
     arcade: {
       gravity: { y: 0 },
-      debug: true
+      debug: false
     }
   },
   scene: [
@@ -22,4 +22,22 @@ const config = {
   ]
 };
 
-const game = new Phaser.Game(config);
+let remaining = 3;
+
+function onLoad() {
+  remaining--;
+  if (remaining <= 0) {
+    const game = new Phaser.Game(config);
+  }
+}
+
+window.flashlight = new Image();
+window.light = new Image();
+window.overlay = new Image();
+window.flashlight.src = '../assets/flashlight2.png';
+window.light.src = '../assets/light.png';
+window.overlay.src = '../assets/overlay.png';
+window.flashlight.addEventListener('load', onLoad);
+window.light.addEventListener('load', onLoad);
+window.overlay.addEventListener('load', onLoad);
+

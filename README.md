@@ -2,10 +2,14 @@
 
 We need [Node.js](https://nodejs.org) to install and run scripts.
 
-## Install and run
-
-Run next commands in your terminal:
-
+## Setup
 - `npm install`
+
+## Running the Client
+
 - `npm start`
 - http://localhost:8000
+
+## Running the Server
+
+- `node server/index.js`
